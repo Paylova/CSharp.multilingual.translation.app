@@ -1,0 +1,36 @@
+﻿@model sozluk.Models.entity.User
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_SignLayout.cshtml";
+}
+<br />
+<br />
+<h2>Kayıt Oluşturma</h2>
+<br />
+<br />
+@using (Html.BeginForm("CreateAccount", "Authentication", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Kullanıcı Adı")
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Parola")
+        <input type="password" class="form-control" name="pw" required />
+    </div>
+    <br />
+    <div>
+        @Html.Label("Mail")
+        @Html.TextBoxFor(m => m.Mail, new { @class = "form-control", type = "email", required = "required" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success">Kayıt Ol</button>
+    </div>
+    <br />
+}
+<div>
+    <p>Zaten bir hesabınız var mı? @Html.ActionLink("Giriş yap", "Login").</p>
+</div>
+

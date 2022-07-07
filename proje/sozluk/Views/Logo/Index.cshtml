@@ -1,0 +1,43 @@
+﻿@using sozluk.Models.entity
+@model List<Logo>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("tablestyle")
+<br />
+<br />
+<h2>Logo İşlemleri</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Logo ID</th>
+            <th>Logo Adı</th>
+            <th>Logo</th>
+            <th>Sayfa Logosunu Seç</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var img in Model)
+        {
+            <tr>
+                <td>@img.id</td>
+                <td>@img.Name</td>
+                <td>
+                    @{
+                        string base64 = Convert.ToBase64String(img.LogoImage);
+                        string imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+                    }
+                </td>
+                <td>@Html.ActionLink("Seç", "Updatelogo", new { id = img.id }, new { @class = "btn btn-success", @onclick = "return confirm('Bu resmi sayfanın logosu olarak ayarlamak istediğinize emin misiniz?')" })</td>
+                <td>@Html.ActionLink("Sil", "Delete", new { id = img.id }, new { @class = "btn btn-danger", @onclick = "return confirm('Silmek/Geri Yüklemek istediğinize emin misiniz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Logo Ekle", "Add", null, new { @class = "btn btn-primary" })
+</div>
+

@@ -1,0 +1,30 @@
+﻿@model sozluk.Models.entity.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_SignLayout.cshtml";
+}
+<br />
+<br />
+<h2>Giriş Yap</h2>
+<br />
+<br />
+@using (Html.BeginForm("Login", "Authentication", FormMethod.Post))
+{
+
+    <div>
+        @Html.Label("Kullanıcı Adı")
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Parola")
+        <input type="password" class="form-control" name="pw" required />
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success">Giriş Yap</button>
+    </div>
+    <br />
+}
+<p>Hesabınız yok mu? @Html.ActionLink("Kayıt ol", "CreateAccount").</p>
+@ViewBag.message

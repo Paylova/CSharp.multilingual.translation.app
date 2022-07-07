@@ -1,0 +1,23 @@
+﻿@model sozluk.Models.entity.Language
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Dil Ekle</h2>
+<br />
+<br />
+@using (Html.BeginForm("Add", "Language", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Dil Girin")
+        @Html.TextBoxFor(m => m.LanguageName, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success" onclick="return confirm('Dil Eklemek İstiyor musunuz?')">Dil Ekle</button>
+    </div>
+}
+<br />
+@Html.ActionLink("Geri", "Index", null, new { @class = "btn btn-primary" })

@@ -1,0 +1,27 @@
+﻿@model sozluk.Models.entity.Logo
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Logo Yükle</h2>
+<br />
+<br />
+@using (Html.BeginForm("Add", "Logo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.Label("Logo Adı")
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        <input type="file" name="userFile" required="required" />
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success" onclick="return confirm('Logo Eklemek İstiyor musunuz?')">Gönder</button>
+    </div>
+}
+<br />
+@Html.ActionLink("Geri", "Index", null, new { @class = "btn btn-primary" })

@@ -1,0 +1,33 @@
+﻿@model sozluk.Models.entity.User
+@{
+    ViewBag.Title = "UserShow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Kullanıcı Güncelleme</h2>
+<br />
+<br />
+@using (Html.BeginForm("Update", "User", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Kullanıcı ID")
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control", @sreadonly = "readonly" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Kullanıcı Adı")
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Mail")
+        @Html.TextBoxFor(m => m.Mail, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-warning" onclick="return confirm('Güncellemek İstiyor musunuz?')">Güncelle</button>
+    </div>
+}
+<br />
+@Html.ActionLink("Geri", "Index", null, new { @class = "btn btn-primary" })

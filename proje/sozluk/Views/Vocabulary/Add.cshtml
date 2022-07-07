@@ -1,0 +1,34 @@
+﻿@model sozluk.Models.entity.Vocabulary
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Kelime Ekle</h2>
+<br />
+<br />
+@using (Html.BeginForm("Add", "Vocabulary", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Dil Seçimi")
+        @Html.DropDownListFor(m => m.Language.Id, (List<SelectListItem>)ViewBag.vls, new { @class = "form-control", required = "required" })
+        
+    </div>
+    <br />
+    <div>
+        @Html.Label("Türkçe Kelime Giriniz")
+        @Html.TextBoxFor(m => m.Word, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Kelimenin Çevirisini Giriniz")
+        @Html.TextBoxFor(m => m.Translation, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success" onclick="return confirm('Kelime Eklemek İstiyor musunuz?')">Kelime Ekle</button>
+    </div>
+}
+<br />
+@Html.ActionLink("Geri", "Index", null, new { @class = "btn btn-primary" })

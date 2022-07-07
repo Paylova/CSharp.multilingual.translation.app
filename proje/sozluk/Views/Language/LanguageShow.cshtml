@@ -1,0 +1,28 @@
+﻿@model sozluk.Models.entity.Language
+@{
+    ViewBag.Title = "LanguageShow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Dil Güncelle</h2>
+<br />
+<br />
+@using (Html.BeginForm("Update", "Language", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Dil ID")
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Dil")
+        @Html.TextBoxFor(m => m.LanguageName, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-warning" onclick="return confirm('Güncellemek İstiyor musunuz?')">Güncelle</button>
+    </div>
+}
+<br />
+@Html.ActionLink("Geri", "Index", null, new { @class = "btn btn-primary" })

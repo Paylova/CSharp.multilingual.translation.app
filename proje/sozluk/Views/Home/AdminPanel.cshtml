@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "AdminPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Yönetici Paneli</h2>
+<br />
+<br />
+@Html.ViewBag.message
+@Html.ActionLink("Kelime İşlemleri", "Index", "Vocabulary", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Dil İşlemleri", "Index", "Language", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Kullanıcı İşlemleri", "Index", "User", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Logo işlemleri", "Index", "Logo", null, new { @class = "btn btn-primary" })

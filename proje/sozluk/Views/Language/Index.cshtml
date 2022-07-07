@@ -1,0 +1,58 @@
+﻿@using sozluk.Models.entity
+@model List<Language>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("tablestyle")
+<br />
+<br />
+<h2>Dil Düzenleme</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Dil ID</th>
+            <th>Dil</th>
+            <th>Aktiflik</th>
+            <th>Silinmişlik</th>
+            <th>Güncelle</th>
+            <th>Görünürlük</th>
+            <th>Sil/Geri Yükle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lang in Model)
+        {
+            <tr>
+                <th>@lang.Id</th>
+                <td>@lang.LanguageName</td>
+                <td>
+                    @if (lang.IsActive == true)
+                    {
+                        <p>Aktif</p>
+                    }
+                    else
+                    {
+                        <p>Pasif</p>
+                    }
+                </td>
+                <td>
+                    @if (lang.IsDeleted == true)
+                    {
+                        <p>Evet</p>
+                    }
+                    else
+                    {
+                        <p>Hayır</p>
+                    }
+                </td>
+                <td>@Html.ActionLink("Güncelle", "LanguageShow", new { id = lang.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Göster/Gizle", "Active", new { id = lang.Id }, new { @class = "btn btn-info", @onclick = "return confirm('Göstermek/Gizlemek istediğinize emin misiniz?')" })</td>
+                <td>@Html.ActionLink("Sil/Geri Yükle", "Delete", new { id = lang.Id }, new { @class = "btn btn-danger", @onclick = "return confirm('Silmek/Geri Yüklemek istediğinize emin misiniz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Dil Ekle", "Add", null, new { @class = "btn btn-primary" })
+</div>

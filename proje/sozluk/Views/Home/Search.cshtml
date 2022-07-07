@@ -1,0 +1,57 @@
+﻿@model sozluk.Models.entity.Vocabulary
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<h2>Çeviri</h2>
+<br />
+<br />
+@using (Html.BeginForm("Search", "Home", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Kelime Giriniz")
+        @Html.TextBoxFor(m => m.Word, new { @class = "form-control", required = "required" })
+    </div>
+    <br />
+    <div>
+        @Html.Label("Dil Seçimi")
+        @Html.DropDownListFor(m => m.Language.Id, (List<SelectListItem>)ViewBag.vls, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        <button type="submit" class="btn btn-success">Ara</button>
+    </div>
+}
+<br />
+@{
+    if (ViewBag.tempcontrol != null)
+    {
+        if (ViewBag.findControl != null)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Türkçe</th>
+                        <th>Çeviri</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var voca in ViewBag.findControl)
+                    {
+                        <tr>
+                            <td>@voca.Word</td>
+                            <td>@voca.Translation</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Aradığınız kelime bulunamadı</p>
+        }
+    }
+}

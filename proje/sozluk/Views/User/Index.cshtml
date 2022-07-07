@@ -1,0 +1,71 @@
+﻿@using sozluk.Models.entity
+@model List<User>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("tablestyle")
+<br />
+<br />
+<h2>Kullanıcı Düzenleme</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Kullanıcı ID</th>
+            <th>Kullanıcı Adı</th>
+            <th>Mail</th>
+            <th>Aktiflik</th>
+            <th>Silinmişlik</th>
+            <th>Adminlik</th>
+            <th>Güncelle</th>
+            <th>Görünürlük</th>
+            <th>Sil/Geri Yükle</th>
+            <th>Adminlik</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usr in Model)
+        {
+            <tr>
+                <th>@usr.Id</th>
+                <td>@usr.Username</td>
+                <td>@usr.Mail</td>
+                <td>
+                    @if (usr.IsActive == true)
+                    {
+                        <p>Aktif</p>
+                    }
+                    else
+                    {
+                        <p>Pasif</p>
+                    }
+                </td>
+                <td>
+                    @if (usr.IsDeleted == true)
+                    {
+                        <p>Evet</p>
+                    }
+                    else
+                    {
+                        <p>Hayır</p>
+                    }
+                </td>
+                <td>
+                    @if (usr.IsAdmin == true)
+                    {
+                        <p>Yönetici</p>
+                    }
+                    else
+                    {
+                        <p>Üye</p>
+                    }
+                </td>
+                <td>@Html.ActionLink("Güncelle", "UserShow", new { id = usr.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Göster/Gizle", "Active", new { id = usr.Id }, new { @class = "btn btn-info", @onclick = "return confirm('Göstermek/Gizlemek istediğinize emin misiniz?')" })</td>
+                <td>@Html.ActionLink("Sil/Geri Yükle", "Delete", new { id = usr.Id }, new { @class = "btn btn-danger", @onclick = "return confirm('Silmek/Geri Yüklemek istediğinize emin misiniz?')" })</td>
+                <td>@Html.ActionLink("Yetki Ver/Al", "Admin", new { id = usr.Id }, new { @class = "btn btn-primary", @onclick = "return confirm('Yetki Vermek/Almak istediğinize emin misiniz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

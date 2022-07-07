@@ -1,0 +1,52 @@
+﻿@using sozluk.Models.entity
+@model List<Vocabulary>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Kelime Düzenleme</h2>
+@Html.Partial("tablestyle")
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Kelime ID</th>
+            <th>Türkçe Kelime</th>
+            <th>Dil</th>
+            <th>Çevirisi</th>
+            <th>Aktiflik</th>
+            <th>Silinmişlik</th>
+            <th>Güncelle</th>
+            <th>Görünürlük</th>
+            <th>Sil/Geri Yükle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var voca in Model)
+        {
+            <tr>
+                <th>@voca.Id</th>
+                <td>@voca.Word</td>
+                <td>@voca.Language.LanguageName</td>
+                <td>@voca.Translation</td>
+                <td>
+                    @if (voca.IsActive == true)
+                    {<p>Aktif</p>}
+                    else
+                    {<p>Pasif</p>}
+                </td>
+                <td>
+                    @if (voca.IsDeleted == true)
+                    {<p>Evet</p>}
+                    else
+                    {<p>Hayır</p>}
+                </td>
+                <td>@Html.ActionLink("Güncelle", "VocabularyShow", new { id = voca.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Göster/Gizle", "Active", new { id = voca.Id }, new { @class = "btn btn-info", @onclick = "return confirm('Göstermek/Gizlemek istediğinize emin misiniz?')" })</td>
+                <td>@Html.ActionLink("Sil/Geri Yükle", "Delete", new { id = voca.Id }, new { @class = "btn btn-danger", @onclick = "return confirm('Silmek/Geri Yüklemek istediğinize emin misiniz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Kelime Ekle", "Add", null, new { @class = "btn btn-primary" })
+</div>
